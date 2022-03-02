@@ -5,7 +5,9 @@ const id = document.getElementById('id')
 const idMsg = document.getElementById('id-msg')
 window.addEventListener('load', () => id.focus())
 const pw = document.getElementById('pw')
+const pwMsg = document.getElementById('pw-msg')
 const pwCheck = document.getElementById('pw-check')
+const pwCheckMsg = document.getElementById('pw-check-msg')
 //변수를 명명할떄 "-"불가하다 camelCase로 명명해야한다.
 
 const ID_REGEX = new RegExp('^[a-z0-9_-]{5,20}$')
@@ -17,6 +19,14 @@ const ID_ERROR_MSG = {
     required: '필수 정보입니다.',
     invalid: '5-20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.',
 } //에러 메시지 정의
+const PW_ERROR_MSG = {
+    required: '필수 정보입니다.',
+    invalid: '8-16자 영문 대 소문자,숫자를 사용하세요.',
+}
+const PW_CHECK_ERROR_MSG = {
+    required: '필수 정보입니다.',
+    invalid: '비밀번호가 일치하지 않습니다.',
+}
 
 const confirmID = (value) => {
     let checkID
@@ -42,13 +52,30 @@ const confirmPW = (value) => {
     } else {
         checkPW = PW_REGEX.test(value) ? true : 'invalid'
     }
-    console.log(checkPW)
+    if (checkPW !== true) {
+        pw.classList.add('border-red-600')
+        pwMsg.innerText = PW_ERROR_MSG[checkPW]
+    } else {
+        pw.classList.remove('border-red-600')
+        pw.innerText = ''
+    }
 }
 pw.addEventListener('focusout', (event) => confirmPW(event.target.value))
 
 const confirmCheckPW = (value) => {
-    const checkPW2 = pw.value === value
-    console.log('PW2', checkPW2)
+    let checkPW2
+    if (value.length === 0) {
+        checkPW2 = 'required'
+    } else {
+        checkPW2 = pw.value === value ? true : 'invalid'
+    }
+    if (checkPW2 !== true) {
+        pwCheck.classList.add('border-red-600')
+        pwCheckMsg.innerText = PW_CHECK_ERROR_MSG[checkPW2]
+    } else {
+        pwCheck.classList.remove('border-red-600')
+        pwCheck.innerText = ''
+    }
 }
 pwCheck.addEventListener('focusout', (event) =>
     confirmCheckPW(event.target.value)

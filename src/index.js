@@ -4,6 +4,7 @@
 const id = document.getElementById('id')
 const idMsg = document.getElementById('id-msg')
 window.addEventListener('load', () => id.focus())
+
 const pw = document.getElementById('pw')
 const pwMsg = document.getElementById('pw-msg')
 const pwCheck = document.getElementById('pw-check')
@@ -122,3 +123,49 @@ approveBtn.addEventListener('click', () => {
     window.alert('가입되었습니다.')
     modal.close()
 })
+
+// 폰트사이즈 조절
+const increaseFontBtn = document.getElementById('increase-font-btn')
+const decreaseFontBtn = document.getElementById('decrease-font-btn')
+
+const html = document.documentElement
+
+const MAX_FONT_SIZE = 20
+const MIN_FONT_SIZE = 12
+
+const getHtmlFontSize = () => {
+    return parseFloat(window.getComputedStyle(html).fontSize)
+}
+increaseFontBtn.addEventListener('click', () => {
+    onClickFontSizeControl('increase')
+    // const nextFontSize = getHtmlFontSize() + 1
+    // html.style.fontSize = nextFontSize
+    // //만약 20이상이면 +버튼 비활성화
+    // if (nextFontSize >= MAX_FONT_SIZE) {
+    //     increaseFontBtn.disabled = true
+    // }
+    // if (nextFontSize > MIN_FONT_SIZE) {
+    //     decreaseFontBtn.disabled = false
+    // }
+})
+
+decreaseFontBtn.addEventListener('click', () => {
+    onClickFontSizeControl('decrease')
+    // const prevFontSize = getHtmlFontSize() - 1
+    // html.style.fontSize = prevFontSize
+    // //만약 12이하이면 -버튼 비활성화
+    // if (prevFontSize <= MIN_FONT_SIZE) {
+    //     decreaseFontBtn.disabled = true
+    // }
+    // if (prevFontSize < MAX_FONT_SIZE) {
+    //     increaseFontBtn.disabled = false
+    // }
+})
+
+const onClickFontSizeControl = (flag) => {
+    const fontSize = getHtmlFontSize()
+    let newFontSize = flag === 'increase' ? fontSize + 1 : fontSize - 1
+    html.style.fontSize = newFontSize
+    decreaseFontBtn.disabled = newFontSize <= MIN_FONT_SIZE
+    increaseFontBtn.disabled = newFontSize >= MAX_FONT_SIZE
+}

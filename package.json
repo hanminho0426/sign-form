@@ -2,17 +2,17 @@
     "name": "signup-form",
     "version": "1.0.0",
     "description": "회원가입 폼",
-    "main": "index.js",
+    "main": "main.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/hanameee/mini-signup-form.git"
+        "url": ""
     },
     "author": "hanameee",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/hanameee/mini-signup-form/issues"
+        "url": ""
     },
-    "homepage": "https://github.com/hanameee/mini-signup-form#readme",
+    "homepage": "",
     "dependencies": {},
     "devDependencies": {
         "eslint": "^8.6.0",

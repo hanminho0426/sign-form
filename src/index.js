@@ -96,11 +96,29 @@ pwCheck.addEventListener('focusout', (event) =>
 //모달 창 구현
 const submit = document.getElementById('submit')
 const modal = document.getElementById('modal')
+const confirmid = document.getElementById('confirm-id')
+const confirmpw = document.getElementById('confirm-pw')
+const cancelBtn = document.getElementById('cancel-btn') //취소하기
+const approveBtn = document.getElementById('approve-btn') //가입하기
 
 submit.addEventListener('click', (event) => {
     event.preventDefault()
     const isConfirmForm =
-        confirmID(id.value) &&
-        confirmPW(pw.value) &&
-        confirmCheckPW(pwCheck.value)
+        confirmID(id.value) === true &&
+        confirmPW(pw.value) === true &&
+        confirmCheckPW(pwCheck.value) === true
+    if (isConfirmForm) {
+        confirmid.innerText = id.value
+        confirmpw.innerText = pw.value
+        modal.showModal()
+    }
+})
+
+cancelBtn.addEventListener('click', () => {
+    modal.close()
+})
+
+approveBtn.addEventListener('click', () => {
+    window.alert('가입되었습니다.')
+    modal.close()
 })
